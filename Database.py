@@ -4,7 +4,7 @@ from Table import Table
 class Database:
     def __init__(self, name) -> None:
         self.name: str = name
-        self.tables: list[Table] = []
+        self.tables = []
     def addTable(self, table) -> bool:
         for tb in self.tables:
             if (tb.name== table.name.lower()):

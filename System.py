@@ -2,7 +2,7 @@ from Database import Database
 
 class System:
     def __init__(self):
-        self.databases: list[Database] = []
+        self.databases = []
     def addDatabase(self, database: Database) -> bool:
         for db in self.databases:
             if (db.name == database.name.lower()):
@@ -15,12 +15,12 @@ class System:
     def getInfo(self) -> (int, int, int):
         databases: int = 0
         tables: int = 0
-        Entrys: int = 0
+        entrys: int = 0
         for database in self.databases:
             for table in database.tables:
-                for Entry in table.Entrys:
-                    Entrys += 1
+                for entry in table.entries:
+                    entrys += 1
                 tables += 1
             databases += 1
         
-        return (databases, tables, Entrys)
+        return (databases, tables, entrys)
