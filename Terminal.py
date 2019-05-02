@@ -108,9 +108,31 @@ def main():
                 print("Table with name \'{table}\' could not be located on database \'{database}\'").format(table=table_name, database=database_name)
             else:
                 table.print()
+        elif (op == "del"):
+            database_name, table_name = array[0].split(".")
+            database_name, table_name = database_name.lower(), table_name.lower()
+
+            # Find database by name
+            database: Database = None
+            for db in system.databases:
+                if (db.name == database_name):
+                    database = db
+                    break
+
+            # Find table
+            table: Table = None
+            for tb in database.tables:
+                if (tb.name == table_name):
+                    table = tb
+                    break
+
+            if (table is None):
+                print("Table with name \'{table}\' could not be located on database \'{database}\'").format(table=table_name, database=database_name)
+            else:
+                table.removeEntry(array[1])
         elif (op == "exit"):
             info = system.getInfo()
-            print("Removed {databases} database(s), {tables} table(s), {Entrys} Entry(s)".format(databases = info[0], tables = info[1], Entrys = info[2]))
+            print("Removed {databases} database(s), {tables} table(s), {Entrys} Entr(y|ies)".format(databases = info[0], tables = info[1], Entrys = info[2]))
             sys.exit(0)
 
     

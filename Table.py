@@ -30,9 +30,19 @@ class Table:
         entry = Entry(fields)
         self.entries.append(entry)
         print("Successfully added entry to {table}".format(table=self.name))
+    def removeEntry(self, id) -> bool:
+        for i in range(0, len(self.entries)):
+            entry = self.entries[i]
+            identifier = str(entry.identifier).lower()
+            if (identifier.startswith(id.lower()) or identifier.lower() == id.lower()):
+                self.entries.pop(i)
+                print("Successfully removed entry from table \'{table}\'".format(table=self.name))
+                return True
+            print("Failed to remove entry from table \'{table}\'".format(table=self.name))
+            return False
     def print(self) -> None:
         for entry in self.entries:
-            output = ""
+            output = str(entry.identifier) + " "
             for field in entry.fields:
                 output += "(" + field.name + "|" + field.value + ")\t"
             print(output)
