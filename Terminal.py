@@ -5,8 +5,12 @@ from Entry import Entry
 from Table import Table
 from Database import Database
 from System import System
+import pyfiglet
 
 system = System()
+ascii_banner = pyfiglet.figlet_format("NoDB")
+print(ascii_banner)
+print("by toclean")
 while True:
     # Read input
     data = input("-> ")
