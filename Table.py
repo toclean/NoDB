@@ -31,14 +31,21 @@ class Table:
         self.entries.append(entry)
         print("Successfully added entry to {table}".format(table=self.name))
     def removeEntry(self, id) -> bool:
+        toRemove = []
         for i in range(0, len(self.entries)):
             entry = self.entries[i]
             identifier = str(entry.identifier).lower()
             if (identifier.startswith(id.lower()) or identifier.lower() == id.lower()):
-                self.entries.pop(i)
-                print("Successfully removed entry from table \'{table}\'".format(table=self.name))
-                return True
-            print("Failed to remove entry from table \'{table}\'".format(table=self.name))
+                toRemove.append(i)
+                # self.entries.pop(i)
+                # print("Successfully removed entry from table \'{table}\'".format(table=self.name))
+                # return True
+        if (len(toRemove) == 1):
+            entry = self.entries.pop(toRemove[0])
+            print("Successfully removed entry {entry} from table \'{table}\'".format(entry=entry.identifier, table=self.name))
+            return True
+        else:
+            print("Failed to remove entry from table \'{table}\' there were multiple entries with that id".format(table=self.name))
             return False
     def print(self) -> None:
         for entry in self.entries:

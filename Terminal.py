@@ -11,6 +11,25 @@ system = System()
 ascii_banner = pyfiglet.figlet_format("NoDB")
 print(ascii_banner)
 print("by toclean")
+
+def GetDatabaseByName(database_name: str) -> Database:
+    # Find database by name
+    database: Database = None
+    for db in system.databases:
+        if (db.name == database_name):
+            database = db
+            break
+    return database
+
+def GetTableByName(database: Database, table_name: str) -> Table:
+    # Find table
+    table: Table = None
+    for tb in database.tables:
+        if (tb.name == table_name):
+            table = tb
+            break
+    return table
+
 while True:
     # Read input
     data = input("-> ")
@@ -44,11 +63,7 @@ while True:
         table = Table(table_name, columns)
 
         # Find database by name
-        database: Database = None
-        for db in system.databases:
-            if (db.name == database_name):
-                database = db
-                break
+        database: Database = GetDatabaseByName(database_name)
 
         # Add table to database
         if (database is None):
@@ -61,22 +76,14 @@ while True:
         database_name, table_name = database_name.lower(), table_name.lower()
 
         # Find database by name
-        database: Database = None
-        for db in system.databases:
-            if (db.name == database_name):
-                database = db
-                break
+        database: Database = GetDatabaseByName(database_name)
 
         # Add table to database
         if (database is None):
             print("Database with name \'{database}\' could not be located".format(database=database_name))
         else:
             # Find table
-            table: Table = None
-            for tb in database.tables:
-                if (tb.name == table_name):
-                    table = tb
-                    break
+            table: Table = GetTableByName(database, table_name)
 
             if (table is None):
                 print("Table with name \'{table}\' could not be located on database \'{database}\'".format(table=table_name, database=database_name))
@@ -94,18 +101,13 @@ while True:
         database_name, table_name = array[0].split(".")
 
         # Find database by name
-        database: Database = None
-        for db in system.databases:
-            if (db.name == database_name):
-                database = db
-                break
+        database: Database = GetDatabaseByName(database_name)
 
-        # Find table
-        table: Table = None
-        for tb in database.tables:
-            if (tb.name == table_name):
-                table = tb
-                break
+        if (database is None):
+            print("Database with name \'{database}\' could not be located".format(database=database_name))
+        else:
+            # Find table
+            table: Table = GetTableByName(database, table_name)
 
         if (table is None):
             print("Table with name \'{table}\' could not be located on database \'{database}\'").format(table=table_name, database=database_name)
@@ -116,18 +118,13 @@ while True:
         database_name, table_name = database_name.lower(), table_name.lower()
 
         # Find database by name
-        database: Database = None
-        for db in system.databases:
-            if (db.name == database_name):
-                database = db
-                break
+        database: Database = GetDatabaseByName(database_name)
 
-        # Find table
-        table: Table = None
-        for tb in database.tables:
-            if (tb.name == table_name):
-                table = tb
-                break
+        if (database is None):
+            print("Database with name \'{database}\' could not be located".format(database=database_name))
+        else:
+            # Find table
+            table: Table = GetTableByName(database, table_name)
 
         if (table is None):
             print("Table with name \'{table}\' could not be located on database \'{database}\'").format(table=table_name, database=database_name)
